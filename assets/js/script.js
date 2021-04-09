@@ -25,10 +25,10 @@ function deckBuild() {
     for (i = 0; i < cards; i++) {
         document.querySelector(".container").innerHTML +=      `<div class="card" onclick="flipper(this)">
                                                                     <div class="front-face face">
-                                                                        <img src="/assets/images/front.png" alt="">
+                                                                        <img src="assets/images/front.png" alt="">
                                                                     </div>
                                                                     <div class="back-face face">
-                                                                        <img src="/assets/images/${backFaces[i]}parrot.gif" alt="">
+                                                                        <img src="assets/images/${backFaces[i]}parrot.gif" alt="">
                                                                     </div>
                                                                 </div>`;
     }
