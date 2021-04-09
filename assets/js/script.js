@@ -1,19 +1,33 @@
-const cards = prompt("Quantas cartas?");
+let cards;
 const parrots = ["bobross", "explody", "fiesta", "metal", "revertit", "unicorn", "triplets"];
-const back = parrots.concat(parrots);
 let flipped = 0;
 let jogadas = 0;
 
-back.sort(comparador);
-for (i = 0; i < cards; i++) {
-    document.querySelector(".container").innerHTML +=      `<div class="card" onclick="flipper(this)">
-                                                                <div class="front-face face">
-                                                                    <img src="/assets/images/front.png" alt="">
-                                                                </div>
-                                                                <div class="back-face face">
-                                                                    <img src="/assets/images/${back[i]}parrot.gif" alt="">
-                                                                </div>
-                                                            </div>`;
+gameStart();
+function gameStart() {
+    do {
+        cards = prompt("Quantas cartas?");
+    } while (cards % 2 !== 0 && 4 <= cards <= 14);
+    deckBuild();
+}
+
+function deckBuild() {
+    const back = [];
+    for (i = 0; i < cards/2; i++) {
+        back.push(parrots[i]);
+        back.push(parrots[i]);
+    }
+    back.sort(comparador);
+    for (i = 0; i < cards; i++) {
+        document.querySelector(".container").innerHTML +=      `<div class="card" onclick="flipper(this)">
+                                                                    <div class="front-face face">
+                                                                        <img src="/assets/images/front.png" alt="">
+                                                                    </div>
+                                                                    <div class="back-face face">
+                                                                        <img src="/assets/images/${back[i]}parrot.gif" alt="">
+                                                                    </div>
+                                                                </div>`;
+    }
 }
 
 function comparador() { 
