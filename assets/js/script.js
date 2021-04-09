@@ -14,8 +14,6 @@ function gameStart() {
         cards = parseInt(prompt("Quantas cartas?"));
         remainder = cards % 2 === 1;
         range = cards < 4 || cards > 14;
-        console.log(range);
-        console.log(remainder)
     } while (remainder || range);
     deckBuild();
     timeID = setInterval(time, 1000);
