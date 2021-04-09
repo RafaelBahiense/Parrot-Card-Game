@@ -8,9 +8,15 @@ let timeID;
 
 gameStart();
 function gameStart() {
+    let remainder;
+    let range;
     do {
         cards = parseInt(prompt("Quantas cartas?"));
-    } while (cards % 2 !== 0 && 4 <= cards <= 14);
+        remainder = cards % 2 === 1;
+        range = cards < 4 || cards > 14;
+        console.log(range);
+        console.log(remainder)
+    } while (remainder || range);
     deckBuild();
     timeID = setInterval(time, 1000);
 }

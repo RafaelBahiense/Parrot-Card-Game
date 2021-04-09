@@ -92,6 +92,9 @@ h1 {
         left: unset;
         margin-left: calc(50% - 55px);
     }
+    .container {
+        padding-top: 30px;
+    }
 }
 
 @media (max-width: 560px) {
