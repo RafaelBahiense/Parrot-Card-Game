@@ -1,30 +1,31 @@
 let cards;
 const parrots = ["bobross", "explody", "fiesta", "metal", "revertit", "unicorn", "triplets"];
+let flippedCache = 0;
+let moves = 0;
 let flipped = 0;
-let jogadas = 0;
 
 gameStart();
 function gameStart() {
     do {
-        cards = prompt("Quantas cartas?");
+        cards = parseInt(prompt("Quantas cartas?"));
     } while (cards % 2 !== 0 && 4 <= cards <= 14);
     deckBuild();
 }
 
 function deckBuild() {
-    const back = [];
+    const backFaces = [];
     for (i = 0; i < cards/2; i++) {
-        back.push(parrots[i]);
-        back.push(parrots[i]);
+        backFaces.push(parrots[i]);
+        backFaces.push(parrots[i]);
     }
-    back.sort(comparador);
+    backFaces.sort(comparador);
     for (i = 0; i < cards; i++) {
         document.querySelector(".container").innerHTML +=      `<div class="card" onclick="flipper(this)">
                                                                     <div class="front-face face">
                                                                         <img src="/assets/images/front.png" alt="">
                                                                     </div>
                                                                     <div class="back-face face">
-                                                                        <img src="/assets/images/${back[i]}parrot.gif" alt="">
+                                                                        <img src="/assets/images/${backFaces[i]}parrot.gif" alt="">
                                                                     </div>
                                                                 </div>`;
     }
@@ -34,37 +35,60 @@ function comparador() {
 	return Math.random() - 0.5; 
 }
 
-let first;
+let firstCard;
 function flipper(card) {
-    if (flipped === 0) {
-        first = card;
+    if (flippedCache === 0) {
+        firstCard = card;
         flipCard(card);
-        flipped++;
+        flippedCache++;
     }
     else {
-        const second = card;
-        console.log(first.children[1].children[0].src);
-        console.log(second.children[1].children[0].src);
-        if (first.children[1].children[0].src === second.children[1].children[0].src) {
-            flipCard(second);
-            first.removeAttribute("onclick");
-            second.removeAttribute("onclick");
-            flipped = 0;
+        const secondCard = card;
+        console.log(firstCard.children[1].children[0].src);
+        console.log(secondCard.children[1].children[0].src);
+        if (firstCard.children[1].children[0].src === secondCard.children[1].children[0].src) {
+            flipCard(secondCard);
+            firstCard.removeAttribute("onclick");
+            secondCard.removeAttribute("onclick");
+            flippedCache = 0;
+            flipped += 2;
+            verifyGameEnd();
             console.log("igual");
         }
         else {
-            flipCard(second);
-            setTimeout(flipCard, 1000, first);
-            setTimeout(flipCard, 1000, second);
-            flipped = 0;
+            flipCard(secondCard);
+            setTimeout(flipCard, 1000, firstCard);
+            setTimeout(flipCard, 1000, secondCard);
+            flippedCache = 0;
             console.log("diferente");
         }
     }
-    console.log(flipped);
+    moves++;
+    console.log("moves", moves);
+    console.log(flippedCache);
 }
 
 function flipCard(card) {
     card.children[0].classList.toggle("flip");
     card.children[1].classList.toggle("flip");
-    jogadas++;
+    setTimeout(verifyGameEnd, 300);
+}
+
+function verifyGameEnd() {
+    console
+    if(flipped === cards) {
+        gameEnd();
+    }
+}
+
+function gameEnd() {
+    const restart = prompt(`Você ganhou em ${moves} jogadas!
+    Deseja jogar novamente? (S/N)`);
+    if (restart === "S" || restart === "s") {
+        document.querySelector(".container").innerHTML = ""
+        flippedCache = 0;
+        moves = 0;
+        flipped = 0;
+        gameStart();
+    }
 }
