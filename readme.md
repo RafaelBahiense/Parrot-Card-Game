@@ -8,4 +8,4 @@ Jogo da Memória
 [Clique aqui](https://rafaelbahiense.github.io/Parrot-Card-Game/) para acessar o projeto
 
 
-![App screencap](https://github.com/Parrot-Card-Game/FoodCamp/blob/master/assets/images/Screencap.png?raw=true)
+![App screencap](https://github.com/RafaelBahiense/Parrot-Card-Game/blob/master/assets/images/screencap.png?raw=true)
