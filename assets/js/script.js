@@ -3,6 +3,8 @@ const parrots = ["bobross", "explody", "fiesta", "metal", "revertit", "unicorn",
 let flippedCache = 0;
 let moves = 0;
 let flipped = 0;
+let timePassed = 0;
+let timeID;
 
 gameStart();
 function gameStart() {
@@ -10,6 +12,7 @@ function gameStart() {
         cards = parseInt(prompt("Quantas cartas?"));
     } while (cards % 2 !== 0 && 4 <= cards <= 14);
     deckBuild();
+    timeID = setInterval(time, 1000);
 }
 
 function deckBuild() {
@@ -82,6 +85,7 @@ function verifyGameEnd() {
 }
 
 function gameEnd() {
+    clearInterval(timeID);
     const restart = prompt(`Você ganhou em ${moves} jogadas!
     Deseja jogar novamente? (S/N)`);
     if (restart === "S" || restart === "s") {
@@ -89,6 +93,13 @@ function gameEnd() {
         flippedCache = 0;
         moves = 0;
         flipped = 0;
+        timePassed = 0;
+        time()
         gameStart();
     }
+}
+
+function time() {
+    timePassed++;
+    document.querySelector(".time").innerHTML = new Date(timePassed * 1000).toISOString().substr(11, 8);
 }

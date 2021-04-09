@@ -30,6 +30,13 @@ h1 {
     text-align: center;
 }
 
+.time {
+    position: absolute;
+    top: 50px;
+    left: calc(50% + 320px);
+    font-size: 30px;
+}
+
 .container {
     margin: 0 auto;
     max-width: 940px;
@@ -78,6 +85,25 @@ h1 {
     width: 100px;
 }
 
+@media (max-width: 900px) {
+    .time {
+        position: initial;
+        top: unset;
+        left: unset;
+        margin-left: calc(50% - 55px);
+    }
+}
+
+@media (max-width: 560px) {
+    .desktop {
+        display: none;
+    }
+
+    .mobile {
+        display: block;
+    }
+}
+
 @media (max-width: 335px) {
     .container {
         padding-left: unset;
@@ -85,15 +111,8 @@ h1 {
         justify-content: unset;
         align-items: center;
     }
+
     .card {
         margin-right: 0px;
-    }
-
-    .desktop {
-        display: none;
-    }
-
-    .mobile {
-        display: block;
     }
 }
