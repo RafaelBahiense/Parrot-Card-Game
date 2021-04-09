@@ -47,8 +47,6 @@ function flipper(card) {
     }
     else {
         const secondCard = card;
-        console.log(firstCard.children[1].children[0].src);
-        console.log(secondCard.children[1].children[0].src);
         if (firstCard.children[1].children[0].src === secondCard.children[1].children[0].src) {
             flipCard(secondCard);
             firstCard.removeAttribute("onclick");
@@ -56,29 +54,24 @@ function flipper(card) {
             flippedCache = 0;
             flipped += 2;
             verifyGameEnd();
-            console.log("igual");
         }
         else {
             flipCard(secondCard);
             setTimeout(flipCard, 1000, firstCard);
             setTimeout(flipCard, 1000, secondCard);
             flippedCache = 0;
-            console.log("diferente");
         }
     }
     moves++;
-    console.log("moves", moves);
-    console.log(flippedCache);
 }
 
 function flipCard(card) {
     card.children[0].classList.toggle("flip");
     card.children[1].classList.toggle("flip");
-    setTimeout(verifyGameEnd, 300);
+    verifyGameEnd();
 }
 
 function verifyGameEnd() {
-    console
     if(flipped === cards) {
         gameEnd();
     }
@@ -86,16 +79,18 @@ function verifyGameEnd() {
 
 function gameEnd() {
     clearInterval(timeID);
-    const restart = prompt(`Você ganhou em ${moves} jogadas!
-    Deseja jogar novamente? (S/N)`);
-    if (restart === "S" || restart === "s") {
+    alert(`Você ganhou em ${moves} jogadas e no tempo ${new Date(timePassed * 1000).toISOString().substr(11, 8)}`);
+    const restartGame = prompt("Deseja jogar novamente? (S/N)");
+    if (restartGame === "S" || restartGame === "s") {
         document.querySelector(".container").innerHTML = ""
         flippedCache = 0;
         moves = 0;
         flipped = 0;
         timePassed = 0;
-        time()
+        time();
         gameStart();
+    } else {
+        alert("Obrigado por jogar!");
     }
 }
 
