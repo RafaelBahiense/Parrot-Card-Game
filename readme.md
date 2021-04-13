@@ -1,5 +1,4 @@
 # Parrot-Card-Game
-Projeto #04
 
 Projeto #04 da quarta semana do bootcamp Responde Aí
 
